@@ -2,24 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Clock</title>
-    <link rel="stylesheet" href="clock.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="clock.css">
+
+   
+
 </head>
+
 <body>
+
     <div class="container">
         <div id="wrapper">
             <span id="hours">00</span>
-            <span >:</span>
+            <span class="blink">:</span>
             <span id="mins">00</span>
-            <span>:</span>
+            <span class="blink">:</span>
             <span id="seconds">00</span>
             <span id="ampm">AM</span>
         </div>
+
+        <div id="date"></div>
     </div>
+
+    <script src="clock.js"></script>
+
     
 
 
-    <script src="clock.js"></script>
 </body>
 </html>

@@ -1,111 +1,53 @@
-//1.
-// let dateTime = new Date()
-
-// console.log(dateTime) no need here 
-
-/*
-let now = new Date(); // current date and time
-console.log(now); // e.g., 2025-04-29T10:15:30.000Z
-
  
-now.getFullYear(); // 2025
-now.getMonth();    // 0-based index (0 = January)
-now.getDate();     // Day of the month
-now.getHours();    // Hour
+        const hoursEl = document.getElementById("hours");
+        const minsEl = document.getElementById("mins");
+        const secsEl = document.getElementById("seconds");
+        const ampmEl = document.getElementById("ampm");
+        const dateEl = document.getElementById("date");
 
- */
+        const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
+        function padZero(num){
+            return num < 10 ? "0" + num : num;
+        }
 
-//2.
+        function displayTime(){
+            let now = new Date();
 
-// function displayTime(){
-//     let hr= dateTime.getHours()
-//     let min = dateTime.getMinutes()
-//     let sec = dateTime.getSeconds()
+            let hr = now.getHours();
+            let min = now.getMinutes();
+            let sec = now.getSeconds();
 
-// }
+            // AM / PM logic
+            if(hr >= 12){
+                ampmEl.textContent = "PM";
+            } else {
+                ampmEl.textContent = "AM";
+            }
 
-// setInterval(displayTime,1000)
+            hr = hr % 12;
+            hr = hr ? hr : 12; // 0 becomes 12
 
+            hoursEl.textContent = padZero(hr);
+            minsEl.textContent = padZero(min);
+            secsEl.textContent = padZero(sec);
 
-//4.
-let AMPM =document.getElementById('ampm')
+            // Date
+            let day = days[now.getDay()];
+            let date = now.getDate();
+            let month = now.getMonth() + 1;
+            let year = now.getFullYear();
 
+            dateEl.textContent = `${day} - ${padZero(date)}/${padZero(month)}/${year}`;
 
-/* 
-if(hr>12){
-        hr=hr-12
-        AMPM.innerHTML='PM'
+            // Background change (day / night)
+            if(now.getHours() >= 6 && now.getHours() < 18){
+                document.body.style.background = "#2c3e50";
+            } else {
+                document.body.style.background = "#1c1c3c";
+            }
+        }
 
-    }
-    else{
-        AMPM.innerHTML='AM'
-    }
-        
-    */
-
-
-//3. now intha values ellam antha antha idathukku varuvathu pol set panna veandum
-
-// function displayTime(){
-//     let dateTime = new Date()
-
-//     let hr= dateTime.getHours()
-//     let min = dateTime.getMinutes()
-//     let sec = dateTime.getSeconds()
-//     if(hr>12){
-//         hr=hr-12
-//         AMPM.innerHTML='PM'
-
-//     }
-//     else{
-//         AMPM.innerHTML='AM'
-//     }
-//     document.getElementById('hours').innerHTML=hr
-//     document.getElementById('mins').innerHTML=min
-//     document.getElementById('seconds').innerHTML=sec
-// }
-
-// setInterval(displayTime,500)
-
-
-//5. single digit double aaha vanthaal nalla irukkum, so single digit aaha varum pothu munnadi single 0 vanthaal ok
-
-function displayTime(){
-    let dateTime = new Date()
-
-    let hr= dateTime.getHours()
-    let min = padZero(dateTime.getMinutes())
-    let sec = padZero(dateTime.getSeconds())
-    if(hr>12){
-        hr=hr-12
-        AMPM.innerHTML='PM'
-
-    }
-    else{
-        AMPM.innerHTML='AM'
-    }
-    document.getElementById('hours').innerHTML=padZero(hr)
-    document.getElementById('mins').innerHTML=min
-    document.getElementById('seconds').innerHTML=sec
-}
-
-setInterval(displayTime,1000)
-
-
-
-function padZero(num){
-    return num<10?"0"+num:num
-}
-
-// function padZero(num) {
-//     if (num < 10) {
-//         return "0" + num;
-//     } else {
-//         return num;
-//     }
-// }
-
-
-
-
+        displayTime();
+        setInterval(displayTime,1000);
+    
